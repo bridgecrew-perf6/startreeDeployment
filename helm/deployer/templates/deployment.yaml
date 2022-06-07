@@ -42,31 +42,6 @@ spec:
               containerPort: {{ .Values.server.port }}
               protocol: TCP
           env:
-            - name: RO_DATABASE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.secretName }}
-                  key: {{ .Values.database.hostKey }}
-            - name: RO_DATABASE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.secretName }}
-                  key: {{ .Values.database.portKey }}
-            - name: RO_DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.secretName }}
-                  key: {{ .Values.database.userKey }}
-            - name: RO_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.secretName }}
-                  key: {{ .Values.database.passwordKey }}
-            - name: RO_DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.secretName }}
-                  key: {{ .Values.database.nameKey }}
             - name: RO_SLACK_USER_TOKEN
               valueFrom:
                 secretKeyRef:
