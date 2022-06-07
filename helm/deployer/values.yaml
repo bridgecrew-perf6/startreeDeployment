@@ -1,0 +1,63 @@
+hostExternal: deployer.startree.ai
+hostInternal: deployer-internal.startree.ai
+# Default values for deployer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: https://github.com/shrikant-rajappan/ContainerRepo/deployer
+  ## Override the suggested chart app version
+  ## defaults to Chart.AppVersion
+  # tagOverride: latest
+  pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+
+# This is where you can add additional sidecars
+#extraSidecars: |
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  name: deployer
+  type: ClusterIP
+  port: 80
+  namespace: pinot-quickstart
+#  namespace: <Need to provide its own namespace>
+
+#resources: {}
+resources:
+  # Since this deployer service run on environments with little
+  # resources, such as Minikube we can provide overrides for different environments
+  # like deployer-prod, deployer-dev and deployer-local for various environments.
+  # We can uncomment lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+
+server:
+  enabled: true
+  port: 3000
+  debug: false

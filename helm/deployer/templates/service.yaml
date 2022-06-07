@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{  .Values.service.name }}
+  namespace: deployer-namespace
+  labels:
+    chart: {{ template "deployer.chart" . }}
+    release: {{ .Release.Name }}
+
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "deployer.selectorLabels" . | nindent 4 }}

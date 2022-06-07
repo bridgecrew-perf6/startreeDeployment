@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{.Release.Name}}-internal
+  namespace: deployer-namespace
+  labels:
+    app: {{.Release.Name}}
+spec:
+  hosts:
+  - {{ .Values.hostInternal }}
+  - {{ .Values.hostExternal }}
+  gateways:
+  - deployer-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /webhooks/v1/slack
+    route:
+    - destination:
+        host: {{ .Values.service.name }}
+        port:
+          number: {{ .Values.service.port }}

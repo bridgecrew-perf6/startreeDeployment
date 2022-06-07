@@ -1,0 +1,28 @@
+
+image:
+#  repository:
+  pullPolicy: IfNotPresent
+
+config.yaml:
+  port: 3000
+  debug: false
+
+#extraSidecars: |
+#  - name: cloudsql-proxy
+#    image: gcr.io/cloudsql-docker/gce-proxy:1.16
+#    command: ["/cloud_sql_proxy",
+#          "-instances=<project:FQDN>=tcp:<port>",
+#          "-ip_address_types=PRIVATE",
+#          "-credential_file=<....>"]
+#    securityContext:
+#      runAsUser: 2
+#      allowPrivilegeEscalation: false
+#    volumeMounts:
+#      - name: sqlproxy-creds
+#        mountPath: /etc/deployer
+#        readOnly: true
+
+#extraVolumes:
+#  - name: <example sqlproxy-creds>
+#    secret:
+#      secretName: <>
